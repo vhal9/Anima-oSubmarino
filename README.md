@@ -75,12 +75,13 @@ void keyboard (unsigned char key, int x, int y){
 
 
 ## Executar o projeto:
-
-- Compilar:
+- Clone o repositório.
+- Abra a pasta do repositório no terminal
+- Utilize o comando abaixo para compilar:
 ```
 gcc -o submarino submarino.c -lglut -lGL -lGLU -lm
 ```
-- executar:
+- Utilize o comando abaixo para executar:
 
 ```
 ./submarino
