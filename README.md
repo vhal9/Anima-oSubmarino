@@ -2,7 +2,7 @@
 
 ## Resumo:
 
-Este repositório contém um projeto que consiste em uma submarino animado utilizando a biblioteca _OpenGL_ para criar formas geométricas, rotações, iluminação e coloração.
+Este repositório contém um projeto que consiste em uma submarino animado utilizando a biblioteca _OpenGL_ e a **linguagem C** para criar formas geométricas, rotações, iluminação e coloração.
 
 ## Implementação:
 - Click na imagem para ver o vídeo com a solução:
