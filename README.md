@@ -5,7 +5,8 @@
 Este repositório contém um projeto que consiste em uma submarino animado utilizando a biblioteca _OpenGL_ e a **linguagem C** para criar formas geométricas, rotações, iluminação e coloração.
 
 ## Implementação:
-- Click na imagem para ver o vídeo com a solução:
+- Clique na imagem para ver o vídeo com a solução:
+- Obs.: É necessário utilizar uma conta da UFLA para acessá-lo.
  
 [![Watch the video](imagens/Submarino.png)](https://drive.google.com/file/d/173O6s6p6NiTC00Nx8k9IzPpxKxt9HhI5/view?usp=sharing)
 
