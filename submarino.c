@@ -4,7 +4,8 @@
 #include <stdlib.h>
 
 static  int horizontal = 90, vertical = 0, helice = 0, periscopio = 0, zoom = 0;
-static bool aceso = false;
+static bool acesoSubmarino = false;
+static bool acesoCena = true;
 
 void init(void) {
    //define o fundo azul escuro da cor do mar
@@ -23,6 +24,19 @@ void DefinirLuz(){
    GLfloat especularidade[4] = {0.5, 0.5, 0.5, 0.1};
 
    GLint especMaterial = 1;
+
+   if(!acesoCena) {
+
+      for (int i = 0; i < 4; i++) {
+
+         luzAmbiente[i] = 0.0;
+         luzDifusa[i] = 0.0;
+         luzEspecular[i] = 0.0;
+         especularidade[i] = 0.0;
+
+      }
+      especMaterial = 0.0;
+   }
  
    glMaterialfv(GL_FRONT, GL_SPECULAR,especularidade);
    glMateriali(GL_FRONT, GL_SPECULAR, especMaterial);
@@ -44,6 +58,8 @@ void DefinirLuz(){
 
 void display(void){
    glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+   DefinirLuz();
+   
    glPushMatrix();
       //definir distancia e posicao vertical e horizontal do objeto
       glTranslatef(0.0, 0.0, zoom);
@@ -73,9 +89,9 @@ void display(void){
 
             //cabine 
             glPushMatrix();
-               //define se esta aceso
-               if(aceso){
-                  glColor3f(0.0f,1.0f,0.0f);
+               //define se esta acesoSubmarino
+               if(acesoSubmarino){
+                  glColor3f(1.0f,1.0f,0.0f);
                }
                else{
                   glColor3f(1.0f,1.0f,1.0f);
@@ -106,7 +122,12 @@ void display(void){
             // helices do submarino
             glPushMatrix();
                //esfera que liga a helice com o submarino
-               glColor3f(0.0f,1.0f,0.0f);
+               if (acesoCena) {
+                  glColor3f(0.0f,1.0f,0.0f);   
+               } else {
+                  glColor3f(1.0f,1.0f,1.0f);
+               }
+               
                glTranslatef(0.0, 0.0, 5);
                glRotatef(helice, 0.0, 0.0,1.0);
                glutSolidSphere(0.2, 100, 50);
@@ -124,9 +145,9 @@ void display(void){
             glPopMatrix();
             // inserir as janelas
             glPushMatrix();
-               //define se esta aceso
-               if(aceso){
-                  glColor3f(0.0f,1.0f,0.0f);
+               //define se esta acesoSubmarino
+               if(acesoSubmarino){
+                  glColor3f(1.0f,1.0f,0.0f);
                }
                else{
                   glColor3f(1.0f,1.0f,1.0f);
@@ -165,6 +186,7 @@ void display(void){
    
 
    glutSwapBuffers();
+   glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 void reshape (int w, int h){
@@ -179,7 +201,7 @@ void reshape (int w, int h){
 void MouseOptions(int button, int state, int x, int y){
    //inserir 
    if (button == GLUT_LEFT_BUTTON && state == GLUT_UP){
-      aceso = !(aceso);
+      acesoSubmarino = !(acesoSubmarino);
    }
 
    glutPostRedisplay();
@@ -237,6 +259,10 @@ void keyboard (unsigned char key, int x, int y){
          }
          glutPostRedisplay();
          break;
+      case 'y':
+         acesoCena = !(acesoCena);
+         glutPostRedisplay();
+         break;
       case 27:
          exit(0);
          break;
@@ -255,7 +281,6 @@ int main(int argc, char** argv)
    init ();
    glutDisplayFunc(display); 
    glutReshapeFunc(reshape);
-   DefinirLuz();
    glutMouseFunc(MouseOptions);
    glutKeyboardFunc(keyboard);
 
